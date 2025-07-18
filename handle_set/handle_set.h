@@ -24,7 +24,7 @@
 #define FLAG_space	(1 << 3)
 #define FLAG_+	(1 << 4)
 
-typedef struct parse_set
+typedef struct s_parse_set
 {
 	uint8_t		flag;
 	size_t		pos_width;
@@ -35,16 +35,25 @@ typedef struct parse_set
 	char 		*length_modifier;
 	char 		*conv_type;
 	char 		*form;
-	parse_set	*next;
-}	parse_set;
+	t_parse_set	*next;
+}	t_parse_set;
 
-parse_set	*head;
-parse_set	*tail;
+t_parse_set	*head;
+t_parse_set	*tail;
 
 // handle_set_util
-parse_set	*parse_set_init();
-parse_set	*set_lstadd_last(set);
+t_parse_set	*parse_set_init();
+t_parse_set	*set_lstadd_last(set);
 
 // handle_set_parse
+const char	*substr_moving_idx(format, size_t *cur, size_t end);
+void	set_conv(const char *format, size_t *cur, t_parse_set *set);
+void	set_str(const char *format, size_t cur, size_t next, t_parse_set *set);
+
+// condition_check
+bool	is_argnum(const char *format, size_t cur_idx, size_t *end_idx);
+bool	is_width(const char *format, size_t cur_idx, size_t *end_idx);
+bool	is_length_modifier(const char *format, size_t cur_idx, size_t *end_idx);
+bool	is_conversion(const char *format, size_t cur_idx, size_t *end_idx);
 
 #endif

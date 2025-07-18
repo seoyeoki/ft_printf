@@ -12,7 +12,7 @@
 
 #include "handle_set.h"
 
-bool	is_argnum(const char *format, size_t cur_idx, size_t	*end_idx)
+bool	is_argnum(const char *format, size_t cur_idx, size_t *end_idx) // 이 파일은 bonus 시 bonus를 함께 컴파일
 {
 	char	c;
 

@@ -21,7 +21,7 @@ const char	*substr_moving_idx(format, size_t *cur, size_t end)
 	return (substr);
 }
 
-void	set_conv(const char *format, size_t *cur, parse_set *set) // 이건 parse mandatory, bonus 시에는 파일 자체를 바꿔 껴야 함
+void	set_conv(const char *format, size_t *cur, t_parse_set *set) // 이건 parse mandatory, bonus 시에는 파일 자체를 handle_set_parse_bonus로 바꿔 껴야 함
 {
 	size_t	start;
 	size_t	end;
@@ -42,14 +42,12 @@ void	set_conv(const char *format, size_t *cur, parse_set *set) // 이건 parse m
 	if (is_conversion(format, *cur, &end))
 		set->conv_type = substr_moving_idx(format, cur, end);
 	else
-	{
 		set_str(format, start, end, set);
-		*cur = end;
-	}
+	*cur = end;
 }
 
-void	set_str(const char *format, size_t cur, size_t next, parse_set *set)
+void	set_str(const char *format, size_t cur, size_t next, t_parse_set *set)
 {
-	*set = (parse_set) { 0, };
+	*set = (t_parse_set) { 0, };
 	set->form = ft_substr(format, cur, next - cur);
 }

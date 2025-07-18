@@ -12,16 +12,16 @@
 
 #include "handle_set.h"
 
-parse_set	*parse_set_init()
+t_parse_set	*parse_set_init()
 {
-	parse_set	*set;
+	t_parse_set	*set;
 
-	set = (parse_set *)malloc(sizeof(parse_set));
-	*set = (parse_set) { 0, };
+	set = (t_parse_set *)malloc(sizeof(t_parse_set));
+	*set = (t_parse_set) { .precision = -1, };
 	return (set);
 }
 
-parse_set	*set_lstadd_last(set)
+t_parse_set	*set_lstadd_last(set)
 {
 	if (head == NULL)
 	{
@@ -32,5 +32,17 @@ parse_set	*set_lstadd_last(set)
 	{
 		tail->next = set;
 		tail = tail->next;
+	}
+}
+
+void	parse_set_free()
+{
+	t_parse_set	*free_ptr;
+
+	while (head)
+	{
+		free_ptr = head;
+		head = head->next;
+		free(free_ptr);
 	}
 }

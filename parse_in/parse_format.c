@@ -31,11 +31,11 @@ size_t	find_next_conv(const char *format, size_t current_idx)
 	return (-1);
 }
 
-parse_set	*parse_format(const char *format)
+void	*parse_format(const char *format)
 {
 	size_t		current_idx;
 	size_t		next_conv_idx;
-	parse_set	*set;
+	t_parse_set	*set;
 
 	current_idx = 0;
 	while (format[current_idx] && current_idx != -1)
