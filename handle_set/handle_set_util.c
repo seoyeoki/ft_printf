@@ -21,28 +21,45 @@ t_parse_set	*parse_set_init()
 	return (set);
 }
 
-t_parse_set	*set_lstadd_last(set)
+void	set_lstadd_last(t_parse_set **head, t_parse_set **tail, t_parse_set *set)
 {
-	if (head == NULL)
+	if (*head == NULL)
 	{
-		head = set;
-		tail = set;
+		*head = set;
+		*tail = set;
 	}
 	else
 	{
-		tail->next = set;
-		tail = tail->next;
+		(*tail)->next = set;
+		*tail = (*tail)->next;
 	}
 }
 
-void	parse_set_free()
+void	parse_set_free(t_parse_set **head, t_parse_set **tail)
 {
 	t_parse_set	*free_ptr;
 
-	while (head)
+	while (*head)
 	{
-		free_ptr = head;
-		head = head->next;
+		free_ptr = *head;
+		*head = (*head)->next;
 		free(free_ptr);
 	}
+	*head = NULL;
+	*tail = NULL;
+}
+
+const char	*substr_moving_idx(const char *format, size_t *cur, size_t end)
+{
+	const char	*substr;
+
+	substr = (const char *)ft_substr(format, *cur, end - *cur);
+	*cur = end;
+	return (substr);
+}
+
+void	set_str(const char *format, size_t cur, size_t next, t_parse_set *set)
+{
+	*set = (t_parse_set) { 0 };
+	set->data.s = ft_substr(format, cur, next - cur);
 }

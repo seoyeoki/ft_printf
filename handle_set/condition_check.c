@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "handle_set.h"
+#include "libft.h"
 
 bool	is_argnum(const char *format, size_t cur_idx, size_t *end_idx) // 이 파일은 bonus 시 bonus를 함께 컴파일
 {
@@ -24,7 +25,7 @@ bool	is_argnum(const char *format, size_t cur_idx, size_t *end_idx) // 이 파�
 			*end_idx = cur_idx;
 			return (true);
 		}
-		if (isdigit(c))
+		if (ft_isdigit(c))
 			cur_idx++;
 		else
 			return (false);
@@ -36,9 +37,9 @@ bool	is_width(const char *format, size_t cur_idx, size_t *end_idx)
 {
 	if (!format[cur_idx])
 		return (false);
-	if (!isdigit(format[cur_idx]) || format[cur_idx] == '0')
+	if (!ft_isdigit(format[cur_idx]) || format[cur_idx] == '0')
 		return (false);
-	while (isdigit(format[cur_idx]))
+	while (ft_isdigit(format[cur_idx]))
 		cur_idx++;
 	*end_idx = cur_idx;
 	return (true);
@@ -48,7 +49,7 @@ bool	is_length_modifier(const char *format, size_t cur_idx, size_t *end_idx)
 {
 	int			i;
 	int			lm_len;
-	const char	(*lm_list)[8];
+	const char	*lm_list[8];
 
 	if (!format[cur_idx])
 		return (false);
@@ -64,7 +65,7 @@ bool	is_length_modifier(const char *format, size_t cur_idx, size_t *end_idx)
 	while (lm_list[i])
 	{
 		lm_len = ft_strlen(lm_list[i]);
-		if (ft_strncmp(&format[cur_idx], lm_list[i], lm_len))
+		if (ft_strncmp(&format[cur_idx], lm_list[i], lm_len) == 0)
 		{
 			*end_idx = cur_idx + lm_len;
 			return (true);
@@ -81,7 +82,7 @@ bool	is_conversion(const char *format, size_t cur_idx, size_t *end_idx)
 
 	if (!format[cur_idx])
 		return (false);
-	*conv_list_str = "cspdiuxX%";
+	conv_list_str = "cspdiuxX%";
 	i = 0;
 	while (conv_list_str[i])
 	{
@@ -91,6 +92,21 @@ bool	is_conversion(const char *format, size_t cur_idx, size_t *end_idx)
 			return (true);
 		}
 		i++;
+	}
+	return (false);
+}
+
+bool	is_flag(char c)
+{
+	return (c == '#' || c == '0' || c == '-' || c == ' ' || c == '+');
+}
+
+bool	is_precision(const char *format, size_t cur_idx, size_t *end_idx)
+{
+	if (format[cur_idx] == '.')
+	{
+		*end_idx = cur_idx + 1;
+		return (true);
 	}
 	return (false);
 }

@@ -1,18 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_error.h                                     :+:      :+:    :+:   */
+/*   print_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seoykim <seoykim@student.42gyeongsan.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/19 02:55:40 by seoykim           #+#    #+#             */
-/*   Updated: 2025/07/19 02:56:46 by seoykim          ###   ########.fr       */
+/*   Created: 2025/07/19 05:30:00 by seoykim           #+#    #+#             */
+/*   Updated: 2025/07/19 05:30:00 by seoykim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HANDLE_ERROR_H
-# define HANDLE_ERROR_H
+#include "print.h"
+#include <unistd.h>
 
-enum errnum { no_format = -1, invalid_varg = -2 };
+int	print_output(t_parse_set *head)
+{
+	char	*final_output;
+	int		len;
 
-#endif
+	final_output = construct_final_output(head);
+	if (!final_output)
+		return (-1);
+
+	len = ft_strlen(final_output);
+	write(1, final_output, len);
+	free(final_output);
+
+	return (len);
+}

@@ -10,22 +10,37 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "handle_set.h"
+#include "basic_struct.h"
+#include "parse_format.h"
 #include "manage_varg.h"
+#include "print.h"
+#include "handle_set.h"
 
 int	ft_printf(const char *format, ...)
 {
+	t_parse_set	*head;
+	t_parse_set	*tail;
 	va_list		args;
 	t_parse_set	***varg_list;
 	size_t		vlist_size;
+	int			result;
 
 	head = NULL;
 	tail = NULL;
-	parse_format(format);
-	varg_list = set_varg_list(&vlist_size);
-	va_start(args, format);
-	manage_args(args, varg_list, &vlist_size); /// 여기 작업중(개판)
-	va_end(args);
-	construct_buffer();
-	print();
+	parse_format(format, &head, &tail);
+	varg_list = set_varg_list(head, &vlist_size);
+	if (vlist_size > 0)
+	{
+		va_start(args, format);
+		result = manage_args(args, varg_list, &vlist_size);
+		va_end(args);
+	}
+	else
+	{
+		result = 0;
+	}
+	if (result == 0)
+		result = print_output(head);
+	parse_set_free(&head, &tail);
+	return (result);
 }

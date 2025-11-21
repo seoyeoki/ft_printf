@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "parse_format.h"
 #include "handle_set.h"
 
 bool	ispercent(char c)
@@ -28,29 +29,34 @@ size_t	find_next_conv(const char *format, size_t current_idx)
 			return (current_idx);
 		current_idx++;
 	}
-	return (-1);
+	return (SIZE_MAX);
 }
 
-void	*parse_format(const char *format)
+void	parse_format(const char *format, t_parse_set **head, t_parse_set **tail)
 {
 	size_t		current_idx;
 	size_t		next_conv_idx;
 	t_parse_set	*set;
 
 	current_idx = 0;
-	while (format[current_idx] && current_idx != -1)
+	while (format[current_idx])
 	{
 		set = parse_set_init();
 		next_conv_idx = find_next_conv(format, current_idx);
-		if (current_idx == next_conv_idx) // conv 해석
+		if (next_conv_idx == SIZE_MAX)
+		{
+			set_str(format, current_idx, ft_strlen(format), set);
+			current_idx = ft_strlen(format);
+		}
+		else if (current_idx == next_conv_idx)
 		{
 			set_conv(format, &current_idx, set);
 		}
-		else // 전부 string
+		else
 		{
 			set_str(format, current_idx, next_conv_idx, set);
 			current_idx = next_conv_idx;
 		}
-		set_lstadd_last(set);
+		set_lstadd_last(head, tail, set);
 	}
 }

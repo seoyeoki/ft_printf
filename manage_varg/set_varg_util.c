@@ -29,8 +29,8 @@ void	resize_vlist(t_parse_set ****vlist, size_t *s)
 {
 	t_parse_set	***temp_vlist;
 
-	temp_vlist = (t_parse_set ***)ft_calloc((*s * 2) * sizeof(t_parse_set **));
-	ft_memmove(temp_vlist, &vlist, *s);
+	temp_vlist = (t_parse_set ***)ft_calloc((*s * 2), sizeof(t_parse_set **));
+	ft_memmove(temp_vlist, *vlist, *s * sizeof(t_parse_set **));
 	vlist_free(*vlist, *s);
 	*s = *s * 2;
 	*vlist = temp_vlist;
@@ -40,6 +40,9 @@ size_t	find_first_blank(t_parse_set ***vlist)
 {
 	size_t	i;
 
+	if (!vlist)
+		return (0);
+	
 	i = 0;
 	while (vlist[i])
 		i++;

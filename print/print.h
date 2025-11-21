@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_error.h                                     :+:      :+:    :+:   */
+/*   print.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seoykim <seoykim@student.42gyeongsan.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/19 02:55:40 by seoykim           #+#    #+#             */
-/*   Updated: 2025/07/19 02:56:46 by seoykim          ###   ########.fr       */
+/*   Created: 2025/07/19 05:30:00 by seoykim           #+#    #+#             */
+/*   Updated: 2025/07/19 05:30:00 by seoykim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HANDLE_ERROR_H
-# define HANDLE_ERROR_H
+#ifndef PRINT
+# define PRINT
 
-enum errnum { no_format = -1, invalid_varg = -2 };
+#include "basic_struct.h"
+#include "form_out.h"
+
+/* Main print function */
+int		print_output(t_parse_set *head);
 
 #endif
