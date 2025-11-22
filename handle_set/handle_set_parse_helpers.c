@@ -48,4 +48,3 @@ void	parse_precision(const char *format, size_t *cur, size_t *end,
 		}
 	}
 }
-

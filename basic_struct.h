@@ -17,6 +17,7 @@
 
 # include "libft.h"
 # include "handle_error.h"
+# include <stddef.h>
 
 # define HASH	1
 # define ZERO	2

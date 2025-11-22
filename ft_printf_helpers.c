@@ -42,4 +42,3 @@ void	cleanup_resources(t_parse_set ***varg_list, size_t vlist_size,
 	vlist_free(varg_list, vlist_size);
 	parse_set_free(head, tail);
 }
-

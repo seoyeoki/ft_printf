@@ -69,4 +69,3 @@ char	*format_char(t_parse_set *set)
 		return (format_char_simple(c));
 	}
 }
-

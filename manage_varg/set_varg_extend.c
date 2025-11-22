@@ -35,4 +35,3 @@ void	extend_existing_vlist(t_parse_set *set, t_parse_set ****vlist,
 	(*vlist)[pos] = temp_ptr;
 	free(old_ptr);
 }
-

@@ -69,4 +69,3 @@ char	*format_integer(t_parse_set *set)
 	temp = apply_width(result, set);
 	return (temp);
 }
-

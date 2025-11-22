@@ -57,4 +57,3 @@ void	set_flags(const char *format, size_t *cur, t_parse_set *set)
 			break ;
 	}
 }
-

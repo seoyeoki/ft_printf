@@ -27,8 +27,7 @@ static int	ensure_vlist_size(t_parse_set ****vlist, size_t pos, size_t *s)
 	return (0);
 }
 
-static void	create_new_vlist_slot(t_parse_set *set, t_parse_set ****vlist,
-			size_t pos)
+static void	create_new_vlist_slot(t_parse_set *set, t_parse_set ****vlist, size_t pos)
 {
 	(*vlist)[pos] = (t_parse_set **)ft_calloc(2, sizeof(t_parse_set *));
 	if (!(*vlist)[pos])
@@ -59,4 +58,3 @@ void	insert_vlist_blank(t_parse_set *set, t_parse_set ****vlist, size_t *s)
 	blank_idx = find_first_blank(*vlist, *s);
 	insert_vlist(set, vlist, blank_idx + 1, s);
 }
-
