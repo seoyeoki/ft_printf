@@ -15,7 +15,7 @@
 #include "manage_varg.h"
 #include "handle_set.h"
 
-static int	process_args(va_list args, t_parse_set ***varg_list,
+static int	process_args(va_list args, t_parse_set ***varg_list, \
 				size_t *vlist_size)
 {
 	if (manage_args(args, varg_list, vlist_size) != 0)
@@ -23,7 +23,7 @@ static int	process_args(va_list args, t_parse_set ***varg_list,
 	return (0);
 }
 
-int	process_va_args_if_needed(va_list args,
+int	process_va_args_if_needed(va_list args, \
 			t_parse_set ***varg_list, size_t *vlist_size)
 {
 	if (*vlist_size == 0)
@@ -36,7 +36,7 @@ int	process_va_args_if_needed(va_list args,
 	return (0);
 }
 
-void	cleanup_resources(t_parse_set ***varg_list, size_t vlist_size,
+void	cleanup_resources(t_parse_set ***varg_list, size_t vlist_size, \
 			t_parse_set **head, t_parse_set **tail)
 {
 	vlist_free(varg_list, vlist_size);

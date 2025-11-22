@@ -27,7 +27,8 @@ static int	ensure_vlist_size(t_parse_set ****vlist, size_t pos, size_t *s)
 	return (0);
 }
 
-static void	create_new_vlist_slot(t_parse_set *set, t_parse_set ****vlist, size_t pos)
+static void	create_vlist_slot(t_parse_set *set, t_parse_set ****vlist, \
+			size_t pos)
 {
 	(*vlist)[pos] = (t_parse_set **)ft_calloc(2, sizeof(t_parse_set *));
 	if (!(*vlist)[pos])
@@ -35,10 +36,10 @@ static void	create_new_vlist_slot(t_parse_set *set, t_parse_set ****vlist, size_
 	(*vlist)[pos][0] = set;
 }
 
-void	extend_existing_vlist(t_parse_set *set, t_parse_set ****vlist,
+void	extend_existing_vlist(t_parse_set *set, t_parse_set ****vlist, \
 			size_t pos);
 
-void	insert_vlist(t_parse_set *set, t_parse_set ****vlist,
+void	insert_vlist(t_parse_set *set, t_parse_set ****vlist, \
 			size_t pos, size_t *s)
 {
 	if (ensure_vlist_size(vlist, pos, s) != 0)
@@ -46,7 +47,7 @@ void	insert_vlist(t_parse_set *set, t_parse_set ****vlist,
 	if (!vlist || !*vlist)
 		return ;
 	if ((*vlist)[pos - 1] == NULL)
-		create_new_vlist_slot(set, vlist, pos - 1);
+		create_vlist_slot(set, vlist, pos - 1);
 	else
 		extend_existing_vlist(set, vlist, pos - 1);
 }

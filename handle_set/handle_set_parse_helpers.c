@@ -22,7 +22,7 @@ static bool	is_precision(const char *format, size_t cur_idx, size_t *end_idx)
 	return (false);
 }
 
-void	parse_precision(const char *format, size_t *cur, size_t *end,
+void	parse_precision(const char *format, size_t *cur, size_t *end, \
 			t_parse_set *set)
 {
 	size_t	start;

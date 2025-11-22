@@ -24,7 +24,7 @@ t_parse_set	*parse_set_init(void)
 	return (set);
 }
 
-void	set_lstadd_last(t_parse_set **head, t_parse_set **tail,
+void	set_lstadd_last(t_parse_set **head, t_parse_set **tail, \
 			t_parse_set *set)
 {
 	if (*head == NULL)

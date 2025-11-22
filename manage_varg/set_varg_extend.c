@@ -12,14 +12,14 @@
 
 #include "manage_varg.h"
 
-static void	copy_and_extend_vlist(t_parse_set **old_ptr, t_parse_set **temp_ptr,
-			size_t num, t_parse_set *set)
+static void	copy_extend_vlist(t_parse_set **old_ptr, \
+			t_parse_set **temp_ptr, size_t num, t_parse_set *set)
 {
 	ft_memmove(temp_ptr, old_ptr, num * sizeof(t_parse_set *));
 	temp_ptr[num] = set;
 }
 
-void	extend_existing_vlist(t_parse_set *set, t_parse_set ****vlist,
+void	extend_existing_vlist(t_parse_set *set, t_parse_set ****vlist, \
 			size_t pos)
 {
 	size_t		num;
@@ -31,7 +31,7 @@ void	extend_existing_vlist(t_parse_set *set, t_parse_set ****vlist,
 	if (!temp_ptr)
 		return ;
 	old_ptr = (*vlist)[pos];
-	copy_and_extend_vlist(old_ptr, temp_ptr, num, set);
+	copy_extend_vlist(old_ptr, temp_ptr, num, set);
 	(*vlist)[pos] = temp_ptr;
 	free(old_ptr);
 }

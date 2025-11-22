@@ -24,14 +24,14 @@ static char	*format_char_simple(char c)
 	return (result);
 }
 
-static void	apply_char_left_padding(char *result, char c, int width,
+static void	apply_char_left_padding(char *result, char c, int width, \
 				t_parse_set *set)
 {
 	result[0] = c;
 	ft_memset(result + 1, get_padding_char(set), (size_t)(width - 1));
 }
 
-static void	apply_char_right_padding(char *result, char c, int width,
+static void	apply_char_right_padding(char *result, char c, int width, \
 				t_parse_set *set)
 {
 	ft_memset(result, get_padding_char(set), (size_t)(width - 1));

@@ -43,7 +43,7 @@ void		copy_conv_data(char *res, t_parse_set *cur, size_t *pos);
 
 /* format_flag_helpers */
 char		*apply_sign_to_int(char *str, t_parse_set *set, long long val);
-char		*apply_hash_to_hex(char *str, t_parse_set *set,
+char		*apply_hash_to_hex(char *str, t_parse_set *set, \
 			unsigned long long val, int up);
 
 /* format_padding_helpers */
@@ -55,7 +55,7 @@ void		do_right_pad(char *res, char *str, int w, char pad);
 int		calc_itoa_base_len(long long n, int base, int neg);
 void		fill_itoa_base_digits(char *res, long long n, int base, int pos);
 int		calc_utoa_base_len(unsigned long long n, int base);
-void		fill_utoa_digits(char *res, unsigned long long n, int base,
+void		fill_utoa_digits(char *res, unsigned long long n, int base, \
 			int len);
 
 #endif

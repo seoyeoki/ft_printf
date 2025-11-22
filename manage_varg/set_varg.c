@@ -20,10 +20,11 @@ t_parse_set	***vlist_init(size_t vlist_size)
 	return (vlist);
 }
 
-void	insert_vlist(t_parse_set *set, t_parse_set ****vlist, size_t pos, size_t *s);
+void	insert_vlist(t_parse_set *set, t_parse_set ****vlist, \
+			size_t pos, size_t *s);
 void	insert_vlist_blank(t_parse_set *set, t_parse_set ****vlist, size_t *s);
 
-static void	process_conv_nodes(t_parse_set *head,
+static void	process_conv_nodes(t_parse_set *head, \
 				t_parse_set ****varg_list, size_t *vlist_size)
 {
 	t_parse_set	*set_ptr;

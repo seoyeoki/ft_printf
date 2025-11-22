@@ -13,10 +13,10 @@
 #include "handle_set.h"
 
 void	set_flags(const char *format, size_t *cur, t_parse_set *set);
-void	parse_precision(const char *format, size_t *cur, size_t *end,
+void	parse_precision(const char *format, size_t *cur, size_t *end, \
 			t_parse_set *set);
 
-static void	parse_argnum(const char *format, size_t *cur, size_t *end,
+static void	parse_argnum(const char *format, size_t *cur, size_t *end, \
 				t_parse_set *set)
 {
 	if (is_argnum(format, *cur, end))
@@ -26,7 +26,7 @@ static void	parse_argnum(const char *format, size_t *cur, size_t *end,
 	}
 }
 
-static void	parse_width(const char *format, size_t *cur, size_t *end,
+static void	parse_width(const char *format, size_t *cur, size_t *end, \
 				t_parse_set *set)
 {
 	char	*tmp;
@@ -39,7 +39,7 @@ static void	parse_width(const char *format, size_t *cur, size_t *end,
 	}
 }
 
-static void	parse_length_and_conv(const char *format, size_t *cur, size_t *end,
+static void	parse_length_and_conv(const char *format, size_t *cur, size_t *end, \
 				t_parse_set *set)
 {
 	if (is_length_modifier(format, *cur, end))

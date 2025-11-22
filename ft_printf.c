@@ -16,11 +16,13 @@
 #include "print.h"
 #include "handle_set.h"
 
-int	process_va_args_if_needed(va_list args, t_parse_set ***varg_list, size_t *vlist_size);
-void	cleanup_resources(t_parse_set ***varg_list, size_t vlist_size, t_parse_set **head, t_parse_set **tail);
+int	process_va_args_if_needed(va_list args, \
+			t_parse_set ***varg_list, size_t *vlist_size);
+void	cleanup_resources(t_parse_set ***varg_list, size_t vlist_size, \
+			t_parse_set **head, t_parse_set **tail);
 
-static t_parse_set	***parse_and_create_vlist(const char *format,
-					t_parse_set **head, t_parse_set **tail,
+static t_parse_set	***parse_and_create_vlist(const char *format, \
+					t_parse_set **head, t_parse_set **tail, \
 					size_t *vlist_size)
 {
 	*head = NULL;
@@ -29,7 +31,7 @@ static t_parse_set	***parse_and_create_vlist(const char *format,
 	return (set_varg_list(*head, vlist_size));
 }
 
-static int	cleanup_and_print(t_parse_set ***varg_list, size_t vlist_size,
+static int	cleanup_and_print(t_parse_set ***varg_list, size_t vlist_size, \
 				t_parse_set **head, t_parse_set **tail)
 {
 	int	result;

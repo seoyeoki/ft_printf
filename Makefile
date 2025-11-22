@@ -83,11 +83,17 @@ libft/libft.a:
 
 # Build the library (mandatory)
 $(NAME): libft/libft.a $(OBJS)
-	ar rcs $(NAME) $(OBJS) $(LIBFT_OBJS)
+	ar rcs $(NAME) $(OBJS)
+	ar x libft/libft.a
+	ar rcs $(NAME) *.o
+	rm -f *.o
 
 # Build the library (bonus)
 bonus: libft/libft.a $(BONUS_OBJS)
-	ar rcs $(NAME) $(BONUS_OBJS) $(LIBFT_OBJS)
+	ar rcs $(NAME) $(BONUS_OBJS)
+	ar x libft/libft.a
+	ar rcs $(NAME) *.o
+	rm -f *.o
 
 # Compile source files to object files
 %.o: %.c

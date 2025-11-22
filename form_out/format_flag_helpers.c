@@ -33,7 +33,7 @@ char	*apply_sign_to_int(char *str, t_parse_set *set, long long val)
 	return (str);
 }
 
-char	*apply_hash_to_hex(char *str, t_parse_set *set,
+char	*apply_hash_to_hex(char *str, t_parse_set *set, \
 		unsigned long long val, int up)
 {
 	char	*res;

@@ -15,7 +15,7 @@
 
 # include "basic_struct.h"
 
-void	parse_format(const char *format, t_parse_set **head,
+void	parse_format(const char *format, t_parse_set **head, \
 			t_parse_set **tail);
 
 #endif

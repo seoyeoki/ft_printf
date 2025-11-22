@@ -45,7 +45,7 @@ bool	is_width(const char *format, size_t cur_idx, size_t *end_idx)
 	return (true);
 }
 
-static bool	check_lm_match(const char *format, size_t cur_idx,
+static bool	check_lm_match(const char *format, size_t cur_idx, \
 				const char *lm, size_t *end_idx)
 {
 	size_t	lm_len;
