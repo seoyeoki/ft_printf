@@ -6,7 +6,7 @@
 /*   By: seoykim <seoykim@student.42gyeongsan.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 03:27:40 by seoykim           #+#    #+#             */
-/*   Updated: 2025/07/19 04:43:46 by seoykim          ###   ########.fr       */
+/*   Updated: 2025/11/22 15:57:12 by seoykim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define FLAG_STR	2
 
 /* Utility functions */
-int		ft_strcmp(const char *s1, const char *s2);
+int				ft_strcmp(const char *s1, const char *s2);
 
 /* Function declarations */
 void			set_varg(t_parse_set **vlist_p, va_list args);

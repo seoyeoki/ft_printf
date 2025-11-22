@@ -6,7 +6,7 @@
 /*   By: seoykim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 00:58:12 by seoykim           #+#    #+#             */
-/*   Updated: 2025/07/17 05:14:51 by seoykim          ###   ########.fr       */
+/*   Updated: 2025/11/22 15:52:59 by seoykim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "print.h"
 #include "handle_set.h"
 
-int	process_va_args_if_needed(va_list args, \
+int		process_va_args_if_needed(va_list args, \
 			t_parse_set ***varg_list, size_t *vlist_size);
 void	cleanup_resources(t_parse_set ***varg_list, size_t vlist_size, \
 			t_parse_set **head, t_parse_set **tail);
