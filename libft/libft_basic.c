@@ -16,6 +16,8 @@ size_t	ft_strlen(const char *s)
 {
 	size_t	len;
 
+	if (!s)
+		return (0);
 	len = 0;
 	while (s[len])
 		len++;
@@ -28,6 +30,8 @@ char	*ft_strdup(const char *s1)
 	size_t	len;
 	size_t	i;
 
+	if (!s1)
+		return (NULL);
 	len = ft_strlen(s1);
 	dup = (char *)malloc(len + 1);
 	if (!dup)
@@ -122,31 +126,40 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 
 char	*ft_itoa(int n)
 {
-	char	*result;
-	int		len;
-	int		neg;
-	int		temp;
+	char			*result;
+	int				len;
+	int				neg;
+	unsigned int	temp;
 
 	neg = (n < 0);
-	temp = neg ? -n : n;
+	if (neg)
+		temp = -(unsigned int)n;
+	else
+		temp = (unsigned int)n;
 	len = 1;
-	while (temp /= 10)
+	temp = temp / 10;
+	while (temp > 0)
+	{
 		len++;
+		temp = temp / 10;
+	}
 	result = (char *)malloc(len + neg + 1);
 	if (!result)
 		return (NULL);
 	if (neg)
 		result[0] = '-';
 	result[len + neg] = '\0';
-	temp = neg ? -n : n;
+	if (neg)
+		temp = -(unsigned int)n;
+	else
+		temp = (unsigned int)n;
 	while (len--)
 	{
 		result[len + neg] = '0' + (temp % 10);
-		temp /= 10;
+		temp = temp / 10;
 	}
 	return (result);
 }
-
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
@@ -236,7 +249,10 @@ void	*ft_realloc(void *ptr, size_t old_size, size_t new_size)
 	new_ptr = malloc(new_size);
 	if (!new_ptr)
 		return (NULL);
-	ft_memcpy(new_ptr, ptr, old_size < new_size ? old_size : new_size);
+	if (old_size < new_size)
+		ft_memcpy(new_ptr, ptr, old_size);
+	else
+		ft_memcpy(new_ptr, ptr, new_size);
 	free(ptr);
 	return (new_ptr);
 }

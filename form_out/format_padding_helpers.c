@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_main.c                                       :+:      :+:    :+:   */
+/*   format_padding_helpers.c                            :+:      :+:    :+:  */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seoykim <seoykim@student.42gyeongsan.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,37 +10,38 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "print.h"
-#include <unistd.h>
+#include "form_out.h"
 
-static int	calc_output_len(t_parse_set *head)
+char	get_padding_char(t_parse_set *set)
 {
-	t_parse_set	*cur;
-	int			total_len;
-
-	total_len = 0;
-	cur = head;
-	while (cur)
-	{
-		if (cur->conv_type)
-			total_len += cur->out_len;
-		else if (cur->data.s)
-			total_len += ft_strlen(cur->data.s);
-		cur = cur->next;
-	}
-	return (total_len);
+	if (set->flag & ZERO && !(set->flag & MINUS) && set->precision < 0)
+		return ('0');
+	return (' ');
 }
 
-int	print_output(t_parse_set *head)
+void	do_left_pad(char *res, char *str, int w, char pad)
 {
-	char	*final_output;
-	int		len;
+	int	len;
 
-	final_output = construct_final_output(head);
-	if (!final_output)
-		return (-1);
-	len = calc_output_len(head);
-	write(1, final_output, len);
-	free(final_output);
-	return (len);
+	len = ft_strlen(str);
+	ft_memcpy(res, str, (size_t)len);
+	ft_memset(res + len, pad, (size_t)(w - len));
+}
+
+void	do_right_pad(char *res, char *str, int w, char pad)
+{
+	int	len;
+
+	len = ft_strlen(str);
+	if (pad == '0' && (str[0] == '-' || str[0] == '+' || str[0] == ' '))
+	{
+		res[0] = str[0];
+		ft_memset(res + 1, pad, (size_t)(w - len));
+		ft_memcpy(res + w - len + 1, str + 1, (size_t)(len - 1));
+	}
+	else
+	{
+		ft_memset(res, pad, (size_t)(w - len));
+		ft_memcpy(res + w - len, str, (size_t)len);
+	}
 }

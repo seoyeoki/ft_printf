@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_error.h                                     :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seoykim <seoykim@student.42gyeongsan.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/19 02:55:40 by seoykim           #+#    #+#             */
-/*   Updated: 2025/07/19 02:56:46 by seoykim          ###   ########.fr       */
+/*   Created: 2025/07/19 05:30:00 by seoykim           #+#    #+#             */
+/*   Updated: 2025/07/19 05:30:00 by seoykim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HANDLE_ERROR_H
-# define HANDLE_ERROR_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-enum	e_errnum
-{
-	no_format = -1,
-	invalid_varg = -2
-};
+# include <stdarg.h>
+
+int	ft_printf(const char *format, ...);
 
 #endif

@@ -18,28 +18,28 @@
 # include "libft.h"
 # include "handle_error.h"
 
-# define HASH	(1 << 0)
-# define ZERO	(1 << 1)
-# define MINUS	(1 << 2)
-# define SPACE	(1 << 3)
-# define PLUS	(1 << 4)
+# define HASH	1
+# define ZERO	2
+# define MINUS	4
+# define SPACE	8
+# define PLUS	16
 
 typedef union u_data
 {
-	char		*c;
-	int			i;
-	unsigned int	ui;
-	long		l;
-	unsigned long	ul;
-	long long		ll;
+	char				*c;
+	int					i;
+	unsigned int		ui;
+	long				l;
+	unsigned long		ul;
+	long long			ll;
 	unsigned long long	ull;
-	intmax_t	im;
-	uintmax_t	uim;
-	size_t		st;
-	ssize_t		sst;
-	ptrdiff_t	pd;
-	void		*p;
-	char		*s;
+	intmax_t			im;
+	uintmax_t			uim;
+	size_t				st;
+	ssize_t				sst;
+	ptrdiff_t			pd;
+	void				*p;
+	char				*s;
 }	t_data;
 
 typedef struct s_parse_set
@@ -50,9 +50,10 @@ typedef struct s_parse_set
 	size_t				pos_conv;
 	int					width;
 	int					precision;
-	char 				*length_modifier;
-	char 				*conv_type;
+	char				*length_modifier;
+	char				*conv_type;
 	t_data				data;
+	size_t				out_len;
 	struct s_parse_set	*next;
 }	t_parse_set;
 

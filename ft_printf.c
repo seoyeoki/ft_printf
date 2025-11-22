@@ -16,31 +16,52 @@
 #include "print.h"
 #include "handle_set.h"
 
+int	process_va_args_if_needed(va_list args,
+			t_parse_set ***varg_list, size_t *vlist_size);
+void	cleanup_resources(t_parse_set ***varg_list, size_t vlist_size,
+			t_parse_set **head, t_parse_set **tail);
+
+static t_parse_set	***parse_and_create_vlist(const char *format,
+					t_parse_set **head, t_parse_set **tail,
+					size_t *vlist_size)
+{
+	*head = NULL;
+	*tail = NULL;
+	parse_format(format, head, tail);
+	return (set_varg_list(*head, vlist_size));
+}
+
+static int	cleanup_and_print(t_parse_set ***varg_list, size_t vlist_size,
+				t_parse_set **head, t_parse_set **tail)
+{
+	int	result;
+
+	result = print_output(*head);
+	cleanup_resources(varg_list, vlist_size, head, tail);
+	return (result);
+}
+
 int	ft_printf(const char *format, ...)
 {
 	t_parse_set	*head;
 	t_parse_set	*tail;
-	va_list		args;
 	t_parse_set	***varg_list;
 	size_t		vlist_size;
-	int			result;
+	va_list		args;
 
-	head = NULL;
-	tail = NULL;
-	parse_format(format, &head, &tail);
-	varg_list = set_varg_list(head, &vlist_size);
-	if (vlist_size > 0)
+	varg_list = parse_and_create_vlist(format, &head, &tail, &vlist_size);
+	if (!varg_list)
 	{
-		va_start(args, format);
-		result = manage_args(args, varg_list, &vlist_size);
+		parse_set_free(&head, &tail);
+		return (-1);
+	}
+	va_start(args, format);
+	if (process_va_args_if_needed(args, varg_list, &vlist_size) != 0)
+	{
 		va_end(args);
+		parse_set_free(&head, &tail);
+		return (-1);
 	}
-	else
-	{
-		result = 0;
-	}
-	if (result == 0)
-		result = print_output(head);
-	parse_set_free(&head, &tail);
-	return (result);
+	va_end(args);
+	return (cleanup_and_print(varg_list, vlist_size, &head, &tail));
 }

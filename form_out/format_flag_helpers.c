@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.h                                            :+:      :+:    :+:   */
+/*   format_flag_helpers.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seoykim <seoykim@student.42gyeongsan.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,14 +10,40 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINT_H
-# define PRINT_H
+#include "form_out.h"
 
-# include "basic_struct.h"
-# include "form_out.h"
+char	*apply_sign_to_int(char *str, t_parse_set *set, long long val)
+{
+	char	*res;
 
-/* Main print function */
-int		print_output(t_parse_set *head);
-char	*construct_final_output(t_parse_set *head);
+	if (val < 0)
+		return (str);
+	if (set->flag & PLUS)
+	{
+		res = ft_strjoin("+", str);
+		free(str);
+		return (res);
+	}
+	else if (set->flag & SPACE)
+	{
+		res = ft_strjoin(" ", str);
+		free(str);
+		return (res);
+	}
+	return (str);
+}
 
-#endif
+char	*apply_hash_to_hex(char *str, t_parse_set *set,
+		unsigned long long val, int up)
+{
+	char	*res;
+
+	if (!(set->flag & HASH) || val == 0)
+		return (str);
+	if (up)
+		res = ft_strjoin("0X", str);
+	else
+		res = ft_strjoin("0x", str);
+	free(str);
+	return (res);
+}

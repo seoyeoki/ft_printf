@@ -16,35 +16,55 @@ void	vlist_free(t_parse_set ***vlist, size_t vlist_size)
 {
 	size_t	i;
 
+	if (!vlist)
+		return ;
 	i = 0;
 	while (i < vlist_size)
 	{
-		free(vlist[i]);
+		if (vlist[i])
+		{
+			free(vlist[i]);
+			vlist[i] = NULL;
+		}
 		i++;
 	}
 	free(vlist);
 }
 
-void	resize_vlist(t_parse_set ****vlist, size_t *s)
+int	resize_vlist(t_parse_set ****vlist, size_t *s)
 {
 	t_parse_set	***temp_vlist;
+	t_parse_set	***old_vlist;
+	size_t		i;
+	size_t		new_size;
 
-	temp_vlist = (t_parse_set ***)ft_calloc((*s * 2), sizeof(t_parse_set **));
-	ft_memmove(temp_vlist, *vlist, *s * sizeof(t_parse_set **));
-	vlist_free(*vlist, *s);
-	*s = *s * 2;
+	if (!vlist || !*vlist || !s)
+		return (-1);
+	new_size = *s * 2;
+	temp_vlist = (t_parse_set ***)ft_calloc(new_size, sizeof(t_parse_set **));
+	if (!temp_vlist)
+		return (-1);
+	old_vlist = *vlist;
+	i = 0;
+	while (i < *s)
+	{
+		temp_vlist[i] = old_vlist[i];
+		i++;
+	}
 	*vlist = temp_vlist;
+	*s = new_size;
+	free(old_vlist);
+	return (0);
 }
 
-size_t	find_first_blank(t_parse_set ***vlist)
+size_t	find_first_blank(t_parse_set ***vlist, size_t vlist_size)
 {
 	size_t	i;
 
 	if (!vlist)
 		return (0);
-	
 	i = 0;
-	while (vlist[i])
+	while (i < vlist_size && vlist[i])
 		i++;
 	return (i);
 }

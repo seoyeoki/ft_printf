@@ -12,86 +12,57 @@
 
 #include "form_out.h"
 
-static char	*get_formatted_string(t_parse_set *current)
+char	*format_percent(t_parse_set *set)
 {
-	if (!current->conv_type)
-		return (NULL);
-	
-	if (ft_strcmp(current->conv_type, "c") == 0)
-		return (format_char(current));
-	else if (ft_strcmp(current->conv_type, "s") == 0)
-		return (format_string(current));
-	else if (ft_strcmp(current->conv_type, "p") == 0)
-		return (format_pointer(current));
-	else if (ft_strcmp(current->conv_type, "d") == 0 || ft_strcmp(current->conv_type, "i") == 0)
-		return (format_integer(current));
-	else if (ft_strcmp(current->conv_type, "u") == 0)
-		return (format_unsigned(current));
-	else if (ft_strcmp(current->conv_type, "x") == 0)
-		return (format_hex(current, 0));
-	else if (ft_strcmp(current->conv_type, "X") == 0)
-		return (format_hex(current, 1));
-	else if (ft_strcmp(current->conv_type, "%") == 0)
-		return (format_percent(current));
-	return (NULL);
+	(void)set;
+	return (ft_strdup("%"));
 }
 
 static size_t	calculate_total_length(t_parse_set *head)
 {
-	t_parse_set	*current;
+	t_parse_set	*cur;
 	char		*formatted_str;
 	size_t		total_len;
 
 	total_len = 0;
-	current = head;
-	while (current)
+	cur = head;
+	while (cur)
 	{
-		if (current->conv_type)
+		if (cur->conv_type)
 		{
-			formatted_str = get_formatted_string(current);
+			formatted_str = get_formatted_string(cur);
 			if (formatted_str)
 			{
-				total_len += ft_strlen(formatted_str);
+				total_len += cur->out_len;
 				free(formatted_str);
 			}
 		}
-		else if (current->data.s)
-		{
-			total_len += ft_strlen(current->data.s);
-		}
-		current = current->next;
+		else if (cur->data.s)
+			total_len += ft_strlen(cur->data.s);
+		cur = cur->next;
 	}
 	return (total_len);
 }
 
 static void	copy_to_result(char *result, t_parse_set *head)
 {
-	t_parse_set	*current;
-	char		*formatted_str;
+	t_parse_set	*cur;
 	size_t		pos;
+	size_t		len;
 
 	pos = 0;
-	current = head;
-	while (current)
+	cur = head;
+	while (cur)
 	{
-		if (current->conv_type)
+		if (cur->conv_type)
+			copy_conv_data(result, cur, &pos);
+		else if (cur->data.s)
 		{
-			formatted_str = get_formatted_string(current);
-			if (formatted_str)
-			{
-				size_t len = ft_strlen(formatted_str);
-				ft_memcpy(result + pos, formatted_str, len);
-				pos += len;
-				free(formatted_str);
-			}
-		}
-		else if (current->data.s)
-		{
-			size_t len = ft_strlen(current->data.s);
-			ft_memcpy(result + pos, current->data.s, len);
+			len = ft_strlen(cur->data.s);
+			ft_memcpy(result + pos, cur->data.s, len);
 			pos += len;
 		}
-		current = current->next;
+		cur = cur->next;
 	}
 	result[pos] = '\0';
 }
@@ -105,7 +76,6 @@ char	*construct_final_output(t_parse_set *head)
 	result = (char *)malloc(total_len + 1);
 	if (!result)
 		return (NULL);
-
 	copy_to_result(result, head);
 	return (result);
 }

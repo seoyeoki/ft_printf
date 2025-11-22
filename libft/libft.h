@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                             :+:      :+:    :+:   */
+/*   libft.h                                             :+:      :+:    :+:  */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seoykim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT
-# define LIBFT
+#ifndef LIBFT_H
+# define LIBFT_H
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <stddef.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <stddef.h>
 
 /* Basic string functions */
 size_t	ft_strlen(const char *s);
@@ -39,5 +39,3 @@ void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 int		ft_isdigit(int c);
 
 #endif
-
-
