@@ -12,6 +12,27 @@
 
 #include "manage_varg.h"
 
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	size_t	len1;
+	size_t	len2;
+	size_t	max_len;
+
+	if (!s1 && !s2)
+		return (0);
+	if (!s1)
+		return (-1);
+	if (!s2)
+		return (1);
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	if (len1 > len2)
+		max_len = len1 + 1;
+	else
+		max_len = len2 + 1;
+	return (ft_strncmp(s1, s2, max_len));
+}
+
 void	vlist_free(t_parse_set ***vlist, size_t vlist_size)
 {
 	size_t	i;

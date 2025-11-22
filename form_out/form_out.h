@@ -14,6 +14,7 @@
 # define FORM_OUT_H
 
 # include "basic_struct.h"
+# include "manage_varg.h"
 
 /* Main formatting function */
 char	*construct_final_output(t_parse_set *head);

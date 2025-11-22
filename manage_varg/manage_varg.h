@@ -22,6 +22,9 @@
 # define FLAG_NUM	1
 # define FLAG_STR	2
 
+/* Utility functions */
+int		ft_strcmp(const char *s1, const char *s2);
+
 /* Function declarations */
 void			set_varg(t_parse_set **vlist_p, va_list args);
 bool			valid_varg(t_parse_set **vlist_p);
